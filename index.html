@@ -3,8 +3,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-<!-- ==========  STYLE  ========== -->
-<!-- ========== STYLE ========== -->
+
 <style>
 
 /* --------- RESET + GLOBAL --------- */
@@ -359,5 +358,68 @@ const hftStepLabels = {
   3: { load: "Optimizing product selection…",    done: "Essentials Selected" }
 };
 
-/* -------- rest of script unchanged -------- */
+
+let currentStep = 1;
+let currentBar = null;
+let currentPercent = null;
+let currentLabel = null;
+let currentCheck = null;
+
+function hftShowStep(step) {
+  document.getElementById(`step-${step}`).classList.add("hft-show");
+}
+
+function hftStartBar(step) {
+  currentBar     = document.getElementById(`bar-${step}`);
+  currentPercent = document.getElementById(`percent-${step}`);
+  currentLabel   = document.getElementById(`label-${step}`);
+  currentCheck   = document.getElementById(`check-${step}`);
+
+  let width = 0;
+  currentLabel.textContent = hftStepLabels[step].load;
+
+  const interval = setInterval(() => {
+    width++;
+    currentBar.style.width = width + "%";
+    currentPercent.textContent = width + "%";
+
+    if (width >= 100) {
+      clearInterval(interval);
+      currentPercent.classList.add("is-complete");
+      currentCheck.style.display = "block";
+      currentLabel.textContent = hftStepLabels[step].done;
+
+      setTimeout(() => {
+        hftShowPopup(step);
+      }, 300);
+    }
+  }, 40);
+}
+
+function hftShowPopup(step) {
+  const popup = document.getElementById("hft-popup");
+  popup.querySelector(".hft-popup-title").textContent = hftPopupContent[step].t;
+  popup.querySelector(".hft-popup-msg").textContent = hftPopupContent[step].m;
+  popup.style.display = "flex";
+}
+
+function hftHandleResponse() {
+  document.getElementById("hft-popup").style.display = "none";
+
+  if (currentStep < 3) {
+    currentStep++;
+    hftShowStep(currentStep);
+    hftStartBar(currentStep);
+  } else {
+    document.getElementById("final-button").style.display = "block";
+  }
+}
+
+/* Start process automatically */
+window.onload = function () {
+  hftShowStep(1);
+  hftStartBar(1);
+};
+
+
 </script>
