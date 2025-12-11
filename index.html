@@ -1,0 +1,375 @@
+<!-- ==========  EXTERNAL ASSETS  ========== -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- ==========  STYLE  ========== -->
+<!-- ========== STYLE ========== -->
+<style>
+
+/* --------- RESET + GLOBAL --------- */
+body {
+  font-family: poppins, sans-serif !important;
+}
+
+.hft-wrapper {
+  font-family: poppins !important;
+}
+
+.hft-wrapper {
+  background: #fafafb;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+  color: #1b1b1b;
+}
+
+.hft-container {
+  width: 100%;
+  max-width: 34rem;
+  text-align: center;
+}
+
+/* --------- TYPOGRAPHY --------- */
+.hft-title {
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0;
+  font-size: 1rem;
+  color: #1b1b1b;
+}
+
+@media (min-width: 640px) {
+  .hft-title {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .hft-title {
+    font-size: 2rem;
+  }
+}
+
+.hft-title-key {
+  color: #147191;
+}
+
+.hft-step-text {
+  font-size: 0.5rem;
+  color: #374151;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .hft-step-text {
+    font-size: .8rem;
+  }
+}
+
+/* --------- PROGRESS BAR --------- */
+.hft-bar-shell {
+  width: 100%;
+  height: .675rem;
+  background: #e5e7eb;
+  border-radius: 9999px;
+  margin-top: .5rem;
+  overflow: hidden;
+}
+
+.hft-bar {
+  height: 100%;
+  width: 0;
+  background: #16a34a;
+  position: relative;
+  transition: width 2s ease;
+}
+
+.hft-bar-percent {
+  position: absolute;
+  right: .6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: .75rem;
+  color: rgba(255,255,255,.7);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.hft-check {
+  color: #16a34a;
+  font-size: 1.125rem;
+  margin-left: .5rem;
+  display: none;
+}
+
+/* --------- LAYOUT HELPERS --------- */
+.hft-step {
+  display: none;
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.hft-flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hft-show {
+  display: block !important;
+}
+
+.hft-hidden {
+  display: none !important;
+}
+
+/* --------- CTA BUTTON --------- */
+.hft-cta {
+  display: none;
+  margin-top: 3rem;
+}
+
+.hft-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 220px;
+  margin: 0 auto;
+  background: #c98e4b;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: .75rem 1.5rem;
+  border-radius: .625rem;
+  text-decoration: none;
+  transition: background .3s;
+}
+
+.hft-btn:hover {
+  background: #c98e4b;
+}
+
+.hft-btn i {
+  margin-left: .75rem;
+}
+
+/* --------- POPUP --------- */
+.hft-popup {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.6);
+  z-index: 999;
+  padding: 1rem;
+}
+
+.hft-popup-box {
+  background: #fff;
+  width: 100%;
+  max-width: 22rem;
+  padding: 2rem;
+  border-radius: .75rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,.1);
+  text-align: center;
+}
+
+.hft-popup-title {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin: 0 0 .5rem;
+}
+
+.hft-popup-msg {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #111827;
+  line-height: 1.45;
+  margin: 0 0 1.25rem;
+}
+
+.hft-popup-actions {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hft-popup-btn {
+  padding: .5rem 1.25rem;
+  font-size: .9375rem;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+/* Mostrar ✓ al completar */
+.hft-bar-percent.is-complete {
+  color: #fff;
+}
+
+.hft-bar-percent.is-complete::before {
+  content: "\2713";
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.hft-popup-btn.yes {
+  background: #16a34a;
+  color: #fff;
+}
+
+.hft-popup-btn.no {
+  background: #16a34a;
+  color: #fff;
+}
+
+/* ====== BRAND HEADER (TITAN) ====== */
+.hft-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #f3e6d8;
+  border-bottom: 3px solid #c98e4b;
+}
+
+.hft-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: .6rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hft-logo {
+  height: 56px;
+  width: auto;
+}
+
+@media (min-width: 768px) {
+  .hft-logo {
+    height: 72px;
+  }
+}
+
+/* Header can stay sticky but below the popup */
+.hft-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Make popup overlay sit above EVERYTHING */
+.hft-popup {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.6);
+  z-index: 10000;
+  padding: 1rem;
+}
+
+</style>
+
+<header class="hft-header" aria-label="Brand"> 
+  <div class="hft-header-inner">
+    <img
+      class="hft-logo"
+      src="https://assets.prd.heyflow.com/flows/4Vy6vFRkRCqdo6eN21Sj/www/assets/b7e626c7-e9e6-42b7-9698-5844bee95151/original.avif"
+      alt="TITAN"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+</header>
+
+<!-- ==========  HTML  ========== -->
+<div class="hft-wrapper" lang="en">
+  <div class="hft-container">
+
+    <!-- STEPS (initially hidden) -->
+    <div id="step-1" class="hft-step">
+      <div class="hft-flex-between">
+        <p id="label-1" class="hft-step-text">Goal Setting</p>
+        <i id="check-1" class="fas fa-check hft-check"></i>
+      </div>
+      <div class="hft-bar-shell">
+        <div id="bar-1" class="hft-bar"><span id="percent-1" class="hft-bar-percent">0%</span></div>
+      </div>
+    </div>
+
+    <div id="step-2" class="hft-step">
+      <div class="hft-flex-between">
+        <p id="label-2" class="hft-step-text">Lifestyle Response Evaluation</p>
+        <i id="check-2" class="fas fa-check hft-check"></i>
+      </div>
+      <div class="hft-bar-shell">
+        <div id="bar-2" class="hft-bar"><span id="percent-2" class="hft-bar-percent">0%</span></div>
+      </div>
+    </div>
+
+    <div id="step-3" class="hft-step">
+      <div class="hft-flex-between">
+        <p id="label-3" class="hft-step-text">Product Selection Optimization</p>
+        <i id="check-3" class="fas fa-check hft-check"></i>
+      </div>
+      <div class="hft-bar-shell">
+        <div id="bar-3" class="hft-bar"><span id="percent-3" class="hft-bar-percent">0%</span></div>
+      </div>
+    </div>
+
+    <!-- FINAL CTA -->
+    <div id="final-button" class="hft-cta">
+      <a href="https://www.volumane.store/pages/35-off" target="_blank" rel="noopener" class="hft-btn">
+        Submit
+      </a>
+    </div>
+
+  </div><!-- /.container -->
+</div><!-- /.wrapper -->
+
+<!-- POPUP -->
+<div id="hft-popup" class="hft-popup" role="dialog" aria-modal="true">
+  <div class="hft-popup-box">
+    <h2 class="hft-popup-title"></h2>
+    <p class="hft-popup-msg"></p>
+    <div class="hft-popup-actions">
+      <button class="hft-popup-btn no"  onclick="hftHandleResponse()">No</button>
+      <button class="hft-popup-btn yes" onclick="hftHandleResponse()">Yes</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =============================
+   POPUP TEXT (translated)
+   ============================= */
+const hftPopupContent = {
+  1: { t: "To continue, please indicate",
+       m: "Are you determined to finally stop hair loss?" },
+  2: { t: "To continue, please indicate",
+       m: "Did you know that stress and genetics are two of the biggest factors that cause hair loss?" },
+  3: { t: "To continue, please indicate",
+       m: "Would a simpler and more effective hair-care routine be okay with you?" }
+};
+
+/* =============================
+   STEP LABELS (translated)
+   ============================= */
+const hftStepLabels = {
+  1: { load: "Setting goals…",                   done: "Goals" },
+  2: { load: "Evaluating lifestyle responses…",  done: "Individual Adjustment" },
+  3: { load: "Optimizing product selection…",    done: "Essentials Selected" }
+};
+
+/* -------- rest of script unchanged -------- */
+</script>
